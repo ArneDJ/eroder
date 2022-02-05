@@ -38,16 +38,22 @@ Eroder::Eroder()
 	m_water.compile("shaders/erosion/water.comp", GL_COMPUTE_SHADER);
 	m_water.link();
 
+	m_flux.compile("shaders/erosion/flux.comp", GL_COMPUTE_SHADER);
+	m_flux.link();
+
 	m_terrain_ping.format(GL_TEXTURE_2D, GL_RED, GL_R32F, GL_FLOAT);
 	m_terrain_pong.format(GL_TEXTURE_2D, GL_RED, GL_R32F, GL_FLOAT);
 	m_water_ping.format(GL_TEXTURE_2D, GL_RED, GL_R32F, GL_FLOAT);
 	m_water_pong.format(GL_TEXTURE_2D, GL_RED, GL_R32F, GL_FLOAT);
+	m_flux_ping.format(GL_TEXTURE_2D, GL_RGBA, GL_RGBA32F, GL_FLOAT);
+	m_flux_pong.format(GL_TEXTURE_2D, GL_RGBA, GL_RGBA32F, GL_FLOAT);
 }
 	
 void Eroder::bind_textures() const
 {
 	m_terrain_ping.bind(GL_TEXTURE10);
 	m_water_ping.bind(GL_TEXTURE11);
+	m_flux_ping.bind(GL_TEXTURE12);
 }
 	
 void Eroder::reset(const gfx::Texture &input)
@@ -59,6 +65,8 @@ void Eroder::reset(const gfx::Texture &input)
 	m_terrain_pong.resize(input.width(), input.height());
 	m_water_ping.resize(input.width(), input.height());
 	m_water_pong.resize(input.width(), input.height());
+	m_flux_ping.resize(input.width(), input.height());
+	m_flux_pong.resize(input.width(), input.height());
 
 	// copy input data
 	m_copy.use();
@@ -72,6 +80,7 @@ void Eroder::reset(const gfx::Texture &input)
 void Eroder::step(float time)
 {
 	increment_water(time);
+	simulate_flow(time);
 }
 
 void Eroder::increment_water(float time)
@@ -86,4 +95,22 @@ void Eroder::increment_water(float time)
 	glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 	swap_textures(m_water_ping, m_water_pong);
+}
+	
+void Eroder::simulate_flow(float time)
+{
+	m_flux.use();
+	m_flux.uniform_float("TIME", time);
+	m_flux.uniform_int("WIDTH", m_width);
+	m_flux.uniform_int("HEIGHT", m_height);
+
+	m_terrain_ping.bind(0, GL_READ_ONLY);
+	m_water_ping.bind(1, GL_READ_ONLY);
+	m_flux_ping.bind(2, GL_READ_ONLY);
+	m_flux_pong.bind(3, GL_WRITE_ONLY);
+
+	glDispatchCompute(INT_CEIL(m_width, 32), INT_CEIL(m_height, 32), 1);
+	glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
+	
+	swap_textures(m_flux_ping, m_flux_pong);
 }

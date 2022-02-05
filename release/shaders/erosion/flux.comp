@@ -1,0 +1,85 @@
+#version 430 core
+
+layout (r32f, binding = 0) readonly uniform image2D TERRAIN_PING;
+layout (r32f, binding = 1) readonly uniform image2D WATER_PING;
+layout (rgba32f, binding = 2) readonly uniform image2D FLUX_PING;
+
+layout (rgba32f, binding = 3) writeonly uniform image2D FLUX_PONG;
+
+layout (local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
+
+uniform float TIME;
+uniform int WIDTH;
+uniform int HEIGHT;
+
+float output_flow(float A, float g, float l, float h, float f)
+{
+	float s = A * ((g * h) / l);
+
+	return max(0.f, f + TIME * s);
+}
+
+/*
+ * r: right
+ * g: left
+ * b: bottom
+ * a: top
+*/
+
+void main(void)
+{
+	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
+
+	float l = 1.0;
+	float A = l * l; // pipe area
+	float g = 0.8f; // gravity
+
+	vec4 flux = imageLoad(FLUX_PING, uv);
+
+	// terrain height data from neighbor cells
+	float b_top = imageLoad(TERRAIN_PING, ivec2(uv.x, uv.y + 1)).r;
+	float b_bottom = imageLoad(TERRAIN_PING, ivec2(uv.x, uv.y - 1)).r;
+	float b_right = imageLoad(TERRAIN_PING, ivec2(uv.x + 1, uv.y)).r;
+	float b_left = imageLoad(TERRAIN_PING, ivec2(uv.x - 1, uv.y)).r;
+	
+	float b = imageLoad(TERRAIN_PING, uv).r;
+	
+	// water height data from neighbor cells
+	float d_top = imageLoad(WATER_PING, ivec2(uv.x, uv.y + 1)).r;
+	float d_bottom = imageLoad(WATER_PING, ivec2(uv.x, uv.y - 1)).r;
+	float d_right = imageLoad(WATER_PING, ivec2(uv.x + 1, uv.y)).r;
+	float d_left = imageLoad(WATER_PING, ivec2(uv.x - 1, uv.y)).r;
+	
+	float d = imageLoad(WATER_PING, uv).r;
+
+	// height difference between this cell and neighbor cells
+	float h = b + d;
+	float h_left = h - (b_left + d_left);
+	float h_right = h - (b_right + d_right);
+	float h_top = h - (b_top + d_top);
+	float h_bottom = h - (b_bottom + d_bottom);
+
+	// compute the outgoing amount of water from the current cell to the neighbors
+	float f_L = output_flow(A, g, l, h_left, flux.g);
+	float f_R = output_flow(A, g, l, h_right, flux.r);
+	float f_T = output_flow(A, g, l, h_top, flux.a);
+	float f_B = output_flow(A, g, l, h_bottom, flux.b);
+
+	// scaling factor K for the outflow flux
+	float K = min(1.f, (d * l * l) / ((f_L + f_R + f_T + f_B) * TIME));
+
+	// scale output flux by K
+	f_L *= K;
+	f_R *= K;
+	f_T *= K;
+	f_B *= K;
+
+	// deal with boundary conditions
+	// water can't leave the map
+	if (uv.x <= 0) { f_L = 0.f; }
+	if (uv.x >= WIDTH - 1) { f_R = 0.f; }
+	if (uv.y <= 0) { f_B = 0.f; }
+	if (uv.y >= HEIGHT - 1) { f_T = 0.f; }
+
+	imageStore(FLUX_PONG, uv, vec4(f_R, f_L, f_B, f_T));
+}

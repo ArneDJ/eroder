@@ -11,11 +11,15 @@ private:
 private:
 	gfx::Shader m_copy;
 	gfx::Shader m_water;
+	gfx::Shader m_flux;
 private:
 	gfx::Texture m_terrain_ping;
 	gfx::Texture m_terrain_pong;
 	gfx::Texture m_water_ping;
 	gfx::Texture m_water_pong;
+	gfx::Texture m_flux_ping;
+	gfx::Texture m_flux_pong;
 private:
 	void increment_water(float time);
+	void simulate_flow(float time);
 };

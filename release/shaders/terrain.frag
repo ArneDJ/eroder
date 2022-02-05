@@ -10,6 +10,7 @@ out vec4 fcolor;
 
 layout (binding = 10) uniform sampler2D DISPLACEMENT;
 layout (binding = 11) uniform sampler2D WATER;
+layout (binding = 12) uniform sampler2D FLUX;
 //uniform sampler2D TILES;
 //uniform sampler2D NORMALMAP;
 
@@ -20,7 +21,9 @@ void main(void)
 	float height = texture(DISPLACEMENT, fragment.texcoord).r;
 	float water = texture(WATER, fragment.texcoord).r;
 
-	fcolor = vec4(vec3(water), 1.0);
+	fcolor = texture(FLUX, fragment.texcoord);
+
+	//fcolor = vec4(vec3(water), 1.0);
 	//fcolor = vec4(0.5, 0.5, 0.5, 1.0);
 
 	//vec3 normal = texture(NORMALMAP, fragment.texcoord).rgb;
