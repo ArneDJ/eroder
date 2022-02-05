@@ -1,0 +1,3 @@
+/home/foo/Projects/repos/mine/eroder/CMakeFiles/eroder.dir
+/home/foo/Projects/repos/mine/eroder/CMakeFiles/edit_cache.dir
+/home/foo/Projects/repos/mine/eroder/CMakeFiles/rebuild_cache.dir
