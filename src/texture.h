@@ -17,9 +17,10 @@ public:
 	void change_filtering(GLint filter);
 public:
 	void bind(GLenum unit) const;
-	void bind(GLenum unit, GLenum access) const;
+	void bind(GLuint unit, GLenum access) const;
 public:
 	GLuint binding();
+	void set_binding(GLuint bind);
 private:
 	GLsizei m_width = 0;
 	GLsizei m_height = 0;

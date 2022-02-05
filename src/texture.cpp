@@ -177,7 +177,7 @@ void Texture::bind(GLenum unit) const
 	glBindTexture(m_target, m_binding);
 }
 	
-void Texture::bind(GLenum unit, GLenum access) const
+void Texture::bind(GLuint unit, GLenum access) const
 {
 	glBindImageTexture(unit, m_binding, 0, GL_FALSE, 0, access, m_internal_format);
 }
@@ -185,6 +185,11 @@ void Texture::bind(GLenum unit, GLenum access) const
 GLuint Texture::binding()
 {
 	return m_binding;
+}
+	
+void Texture::set_binding(GLuint bind)
+{
+	m_binding = bind;
 }
 
 void Texture::change_filtering(GLint filter)

@@ -37,6 +37,7 @@ public:
 	Terrain();
 public:
 	void reset(int seed);
+	void update(float delta);
 	void display(const util::Camera &camera) const;
 public:
 	glm::vec3 scale = {};
@@ -83,6 +84,11 @@ void Terrain::reset(int seed)
 
 	eroder.reset(texture);
 }
+	
+void Terrain::update(float delta)
+{
+	eroder.step(delta);
+}
 
 void Terrain::display(const util::Camera &camera) const
 {
@@ -90,6 +96,7 @@ void Terrain::display(const util::Camera &camera) const
 	shader.uniform_mat4("CAMERA_VP", camera.VP);
 	shader.uniform_vec3("MAP_SCALE", scale);
 
+	eroder.bind_textures();
 	//texture.bind(GL_TEXTURE0);
 	mesh.draw();
 }
@@ -147,8 +154,10 @@ void run(SDL_Window *window)
 		if (util::InputManager::key_down(SDLK_a)) { camera.move_left(speed); }
 
 		camera.update_viewing();
-		
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		terrain.update(delta);
 
 		terrain.display(camera);
 
