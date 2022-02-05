@@ -153,6 +153,30 @@ src/camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
+src/extern/fastnoise/FastNoise.o: src/extern/fastnoise/FastNoise.cpp.o
+.PHONY : src/extern/fastnoise/FastNoise.o
+
+# target to build an object file
+src/extern/fastnoise/FastNoise.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o
+.PHONY : src/extern/fastnoise/FastNoise.cpp.o
+
+src/extern/fastnoise/FastNoise.i: src/extern/fastnoise/FastNoise.cpp.i
+.PHONY : src/extern/fastnoise/FastNoise.i
+
+# target to preprocess a source file
+src/extern/fastnoise/FastNoise.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.i
+.PHONY : src/extern/fastnoise/FastNoise.cpp.i
+
+src/extern/fastnoise/FastNoise.s: src/extern/fastnoise/FastNoise.cpp.s
+.PHONY : src/extern/fastnoise/FastNoise.s
+
+# target to generate assembly for a file
+src/extern/fastnoise/FastNoise.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.s
+.PHONY : src/extern/fastnoise/FastNoise.cpp.s
+
 src/extern/imgui/imgui.o: src/extern/imgui/imgui.cpp.o
 .PHONY : src/extern/imgui/imgui.o
 
@@ -321,6 +345,30 @@ src/extern/imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.s
 .PHONY : src/extern/imgui/imgui_widgets.cpp.s
 
+src/image.o: src/image.cpp.o
+.PHONY : src/image.o
+
+# target to build an object file
+src/image.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/image.cpp.o
+.PHONY : src/image.cpp.o
+
+src/image.i: src/image.cpp.i
+.PHONY : src/image.i
+
+# target to preprocess a source file
+src/image.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/image.cpp.i
+.PHONY : src/image.cpp.i
+
+src/image.s: src/image.cpp.s
+.PHONY : src/image.s
+
+# target to generate assembly for a file
+src/image.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/image.cpp.s
+.PHONY : src/image.cpp.s
+
 src/input.o: src/input.cpp.o
 .PHONY : src/input.o
 
@@ -393,6 +441,30 @@ src/mesh.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/mesh.cpp.s
 .PHONY : src/mesh.cpp.s
 
+src/noise.o: src/noise.cpp.o
+.PHONY : src/noise.o
+
+# target to build an object file
+src/noise.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/noise.cpp.o
+.PHONY : src/noise.cpp.o
+
+src/noise.i: src/noise.cpp.i
+.PHONY : src/noise.i
+
+# target to preprocess a source file
+src/noise.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/noise.cpp.i
+.PHONY : src/noise.cpp.i
+
+src/noise.s: src/noise.cpp.s
+.PHONY : src/noise.s
+
+# target to generate assembly for a file
+src/noise.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/noise.cpp.s
+.PHONY : src/noise.cpp.s
+
 src/shader.o: src/shader.cpp.o
 .PHONY : src/shader.o
 
@@ -416,6 +488,30 @@ src/shader.s: src/shader.cpp.s
 src/shader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/shader.cpp.s
 .PHONY : src/shader.cpp.s
+
+src/texture.o: src/texture.cpp.o
+.PHONY : src/texture.o
+
+# target to build an object file
+src/texture.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/texture.cpp.o
+.PHONY : src/texture.cpp.o
+
+src/texture.i: src/texture.cpp.i
+.PHONY : src/texture.i
+
+# target to preprocess a source file
+src/texture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/texture.cpp.i
+.PHONY : src/texture.cpp.i
+
+src/texture.s: src/texture.cpp.s
+.PHONY : src/texture.s
+
+# target to generate assembly for a file
+src/texture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/texture.cpp.s
+.PHONY : src/texture.cpp.s
 
 src/timer.o: src/timer.cpp.o
 .PHONY : src/timer.o
@@ -453,6 +549,9 @@ help:
 	@echo "... src/camera.o"
 	@echo "... src/camera.i"
 	@echo "... src/camera.s"
+	@echo "... src/extern/fastnoise/FastNoise.o"
+	@echo "... src/extern/fastnoise/FastNoise.i"
+	@echo "... src/extern/fastnoise/FastNoise.s"
 	@echo "... src/extern/imgui/imgui.o"
 	@echo "... src/extern/imgui/imgui.i"
 	@echo "... src/extern/imgui/imgui.s"
@@ -474,6 +573,9 @@ help:
 	@echo "... src/extern/imgui/imgui_widgets.o"
 	@echo "... src/extern/imgui/imgui_widgets.i"
 	@echo "... src/extern/imgui/imgui_widgets.s"
+	@echo "... src/image.o"
+	@echo "... src/image.i"
+	@echo "... src/image.s"
 	@echo "... src/input.o"
 	@echo "... src/input.i"
 	@echo "... src/input.s"
@@ -483,9 +585,15 @@ help:
 	@echo "... src/mesh.o"
 	@echo "... src/mesh.i"
 	@echo "... src/mesh.s"
+	@echo "... src/noise.o"
+	@echo "... src/noise.i"
+	@echo "... src/noise.s"
 	@echo "... src/shader.o"
 	@echo "... src/shader.i"
 	@echo "... src/shader.s"
+	@echo "... src/texture.o"
+	@echo "... src/texture.i"
+	@echo "... src/texture.s"
 	@echo "... src/timer.o"
 	@echo "... src/timer.i"
 	@echo "... src/timer.s"

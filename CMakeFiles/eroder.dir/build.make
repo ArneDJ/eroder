@@ -83,10 +83,24 @@ CMakeFiles/eroder.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/camera.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/camera.cpp -o CMakeFiles/eroder.dir/src/camera.cpp.s
 
+CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o: CMakeFiles/eroder.dir/flags.make
+CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o: src/extern/fastnoise/FastNoise.cpp
+CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o -MF CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/fastnoise/FastNoise.cpp
+
+CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/foo/Projects/repos/mine/eroder/src/extern/fastnoise/FastNoise.cpp > CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.i
+
+CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/extern/fastnoise/FastNoise.cpp -o CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.s
+
 CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o: src/extern/imgui/imgui.cpp
 CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o -MF CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui.cpp
 
 CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o: src/extern/imgui/imgui_demo.cpp
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o -MF CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_demo.cpp
 
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o: src/extern/imgui/imgui_draw.cpp
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o -MF CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_draw.cpp
 
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o: src/extern/imgui/imgui_impl_opengl3.cpp
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o -MF CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_impl_opengl3.cpp
 
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o: src/extern/imgui/imgui_impl_sdl.cpp
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o -MF CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_impl_sdl.cpp
 
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o: src/extern/imgui/imgui_tables.cpp
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o -MF CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_tables.cpp
 
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o: src/extern/imgui/imgui_widgets.cpp
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o -MF CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_widgets.cpp
 
 CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.i: cmake_force
@@ -181,10 +195,24 @@ CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_widgets.cpp -o CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.s
 
+CMakeFiles/eroder.dir/src/image.cpp.o: CMakeFiles/eroder.dir/flags.make
+CMakeFiles/eroder.dir/src/image.cpp.o: src/image.cpp
+CMakeFiles/eroder.dir/src/image.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/eroder.dir/src/image.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/image.cpp.o -MF CMakeFiles/eroder.dir/src/image.cpp.o.d -o CMakeFiles/eroder.dir/src/image.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/image.cpp
+
+CMakeFiles/eroder.dir/src/image.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/eroder.dir/src/image.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/foo/Projects/repos/mine/eroder/src/image.cpp > CMakeFiles/eroder.dir/src/image.cpp.i
+
+CMakeFiles/eroder.dir/src/image.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/image.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/image.cpp -o CMakeFiles/eroder.dir/src/image.cpp.s
+
 CMakeFiles/eroder.dir/src/input.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/input.cpp.o: src/input.cpp
 CMakeFiles/eroder.dir/src/input.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/eroder.dir/src/input.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/eroder.dir/src/input.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/input.cpp.o -MF CMakeFiles/eroder.dir/src/input.cpp.o.d -o CMakeFiles/eroder.dir/src/input.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/input.cpp
 
 CMakeFiles/eroder.dir/src/input.cpp.i: cmake_force
@@ -198,7 +226,7 @@ CMakeFiles/eroder.dir/src/input.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/main.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/eroder.dir/src/main.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/eroder.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/eroder.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/main.cpp.o -MF CMakeFiles/eroder.dir/src/main.cpp.o.d -o CMakeFiles/eroder.dir/src/main.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/main.cpp
 
 CMakeFiles/eroder.dir/src/main.cpp.i: cmake_force
@@ -212,7 +240,7 @@ CMakeFiles/eroder.dir/src/main.cpp.s: cmake_force
 CMakeFiles/eroder.dir/src/mesh.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/mesh.cpp.o: src/mesh.cpp
 CMakeFiles/eroder.dir/src/mesh.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/eroder.dir/src/mesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/eroder.dir/src/mesh.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/mesh.cpp.o -MF CMakeFiles/eroder.dir/src/mesh.cpp.o.d -o CMakeFiles/eroder.dir/src/mesh.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/mesh.cpp
 
 CMakeFiles/eroder.dir/src/mesh.cpp.i: cmake_force
@@ -223,10 +251,24 @@ CMakeFiles/eroder.dir/src/mesh.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/mesh.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/mesh.cpp -o CMakeFiles/eroder.dir/src/mesh.cpp.s
 
+CMakeFiles/eroder.dir/src/noise.cpp.o: CMakeFiles/eroder.dir/flags.make
+CMakeFiles/eroder.dir/src/noise.cpp.o: src/noise.cpp
+CMakeFiles/eroder.dir/src/noise.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/eroder.dir/src/noise.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/noise.cpp.o -MF CMakeFiles/eroder.dir/src/noise.cpp.o.d -o CMakeFiles/eroder.dir/src/noise.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/noise.cpp
+
+CMakeFiles/eroder.dir/src/noise.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/eroder.dir/src/noise.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/foo/Projects/repos/mine/eroder/src/noise.cpp > CMakeFiles/eroder.dir/src/noise.cpp.i
+
+CMakeFiles/eroder.dir/src/noise.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/noise.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/noise.cpp -o CMakeFiles/eroder.dir/src/noise.cpp.s
+
 CMakeFiles/eroder.dir/src/shader.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/shader.cpp.o: src/shader.cpp
 CMakeFiles/eroder.dir/src/shader.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/eroder.dir/src/shader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/eroder.dir/src/shader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/shader.cpp.o -MF CMakeFiles/eroder.dir/src/shader.cpp.o.d -o CMakeFiles/eroder.dir/src/shader.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/shader.cpp
 
 CMakeFiles/eroder.dir/src/shader.cpp.i: cmake_force
@@ -237,10 +279,24 @@ CMakeFiles/eroder.dir/src/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/shader.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/shader.cpp -o CMakeFiles/eroder.dir/src/shader.cpp.s
 
+CMakeFiles/eroder.dir/src/texture.cpp.o: CMakeFiles/eroder.dir/flags.make
+CMakeFiles/eroder.dir/src/texture.cpp.o: src/texture.cpp
+CMakeFiles/eroder.dir/src/texture.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/eroder.dir/src/texture.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/texture.cpp.o -MF CMakeFiles/eroder.dir/src/texture.cpp.o.d -o CMakeFiles/eroder.dir/src/texture.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/texture.cpp
+
+CMakeFiles/eroder.dir/src/texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/eroder.dir/src/texture.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/foo/Projects/repos/mine/eroder/src/texture.cpp > CMakeFiles/eroder.dir/src/texture.cpp.i
+
+CMakeFiles/eroder.dir/src/texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/eroder.dir/src/texture.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/foo/Projects/repos/mine/eroder/src/texture.cpp -o CMakeFiles/eroder.dir/src/texture.cpp.s
+
 CMakeFiles/eroder.dir/src/timer.cpp.o: CMakeFiles/eroder.dir/flags.make
 CMakeFiles/eroder.dir/src/timer.cpp.o: src/timer.cpp
 CMakeFiles/eroder.dir/src/timer.cpp.o: CMakeFiles/eroder.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/eroder.dir/src/timer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/eroder.dir/src/timer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/eroder.dir/src/timer.cpp.o -MF CMakeFiles/eroder.dir/src/timer.cpp.o.d -o CMakeFiles/eroder.dir/src/timer.cpp.o -c /home/foo/Projects/repos/mine/eroder/src/timer.cpp
 
 CMakeFiles/eroder.dir/src/timer.cpp.i: cmake_force
@@ -254,6 +310,7 @@ CMakeFiles/eroder.dir/src/timer.cpp.s: cmake_force
 # Object files for target eroder
 eroder_OBJECTS = \
 "CMakeFiles/eroder.dir/src/camera.cpp.o" \
+"CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o" \
 "CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o" \
 "CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o" \
 "CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o" \
@@ -261,16 +318,20 @@ eroder_OBJECTS = \
 "CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o" \
 "CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o" \
 "CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o" \
+"CMakeFiles/eroder.dir/src/image.cpp.o" \
 "CMakeFiles/eroder.dir/src/input.cpp.o" \
 "CMakeFiles/eroder.dir/src/main.cpp.o" \
 "CMakeFiles/eroder.dir/src/mesh.cpp.o" \
+"CMakeFiles/eroder.dir/src/noise.cpp.o" \
 "CMakeFiles/eroder.dir/src/shader.cpp.o" \
+"CMakeFiles/eroder.dir/src/texture.cpp.o" \
 "CMakeFiles/eroder.dir/src/timer.cpp.o"
 
 # External object files for target eroder
 eroder_EXTERNAL_OBJECTS =
 
 release/eroder: CMakeFiles/eroder.dir/src/camera.cpp.o
+release/eroder: CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/extern/imgui/imgui_draw.cpp.o
@@ -278,10 +339,13 @@ release/eroder: CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_opengl3.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/extern/imgui/imgui_impl_sdl.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/extern/imgui/imgui_tables.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/extern/imgui/imgui_widgets.cpp.o
+release/eroder: CMakeFiles/eroder.dir/src/image.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/input.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/main.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/mesh.cpp.o
+release/eroder: CMakeFiles/eroder.dir/src/noise.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/shader.cpp.o
+release/eroder: CMakeFiles/eroder.dir/src/texture.cpp.o
 release/eroder: CMakeFiles/eroder.dir/src/timer.cpp.o
 release/eroder: CMakeFiles/eroder.dir/build.make
 release/eroder: /usr/lib/libSDL2-2.0.so.0.18.2
@@ -291,7 +355,7 @@ release/eroder: /usr/lib/libOpenGL.so
 release/eroder: /usr/lib/libgomp.so
 release/eroder: /usr/lib/libpthread.so
 release/eroder: CMakeFiles/eroder.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable release/eroder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/foo/Projects/repos/mine/eroder/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable release/eroder"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/eroder.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

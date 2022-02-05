@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 #include <unordered_map>
 #include <vector>
 #include <chrono>
@@ -19,15 +20,25 @@
 #include "input.h"
 #include "timer.h"
 #include "camera.h"
+#include "image.h"
 #include "mesh.h"
+#include "texture.h"
 #include "shader.h"
+#include "noise.h"
+
+const geom::AABB BOUNDS = {
+	{ 0.f, 0.f, 0.f },
+	{ 1024.f, 512.f, 1024.f }
+};
 
 void run(SDL_Window *window)
 {
+	const glm::vec3 scale = BOUNDS.max - BOUNDS.min;
+
 	util::Camera camera;
 	camera.set_projection(90.f, 1920, 1080, 0.1f, 2000.f);
-	camera.position = glm::vec3(0.f, 200.f, 0.f);
-	camera.target(glm::vec3(1000.f, 0.f, 1000.f));
+	camera.position = scale;
+	camera.target(glm::vec3(0.f, 0.f, 0.f));
 
 	gfx::Shader shader;
 	shader.compile("shaders/terrain.vert", GL_VERTEX_SHADER);
@@ -37,8 +48,33 @@ void run(SDL_Window *window)
 	shader.link();
 
 	gfx::TesselationMesh mesh;
-	geom::Rectangle rectangle = { { 0.f, 0.f }, { 1024.f, 1024.f } };
+	geom::Rectangle rectangle = { { BOUNDS.min.x, BOUNDS.min.z }, { BOUNDS.max.x, BOUNDS.max.z } };
 	mesh.create(32, rectangle);
+
+	gfx::Texture texture;
+
+	util::Image<float> heightmap;
+	heightmap.resize(512, 512, util::COLORSPACE_GRAYSCALE);
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib;
+
+	int seed = distrib(gen);
+
+	FastNoise fastnoise;
+	fastnoise.SetSeed(seed);
+	fastnoise.SetNoiseType(FastNoise::SimplexFractal);
+	fastnoise.SetFractalType(FastNoise::FBM);
+	fastnoise.SetFrequency(0.0015f);
+	fastnoise.SetFractalOctaves(6);
+	fastnoise.SetFractalLacunarity(2.f);
+	fastnoise.SetPerturbFrequency(0.001f);
+	fastnoise.SetGradientPerturbAmp(20.f);
+
+	noise_image(heightmap, &fastnoise, glm::vec2(1.f), util::CHANNEL_RED);
+
+	texture.create(heightmap);
 
 	util::FrameTimer timer;
 
@@ -76,7 +112,9 @@ void run(SDL_Window *window)
 
 		shader.use();
 		shader.uniform_mat4("CAMERA_VP", camera.VP);
+		shader.uniform_vec3("MAP_SCALE", scale);
 
+		texture.bind(GL_TEXTURE0);
 		mesh.draw();
 
 		ImGui::Render();
