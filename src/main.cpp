@@ -32,37 +32,41 @@ const geom::AABB BOUNDS = {
 	{ 1024.f, 512.f, 1024.f }
 };
 
-void run(SDL_Window *window)
-{
-	const glm::vec3 scale = BOUNDS.max - BOUNDS.min;
-
-	util::Camera camera;
-	camera.set_projection(90.f, 1920, 1080, 0.1f, 2000.f);
-	camera.position = scale;
-	camera.target(glm::vec3(0.f, 0.f, 0.f));
-
+class Terrain {
+public:
+	Terrain();
+public:
+	void reset(int seed);
+	void display(const util::Camera &camera) const;
+public:
+	glm::vec3 scale = {};
 	gfx::Shader shader;
+	util::Image<float> heightmap;
+	gfx::TesselationMesh mesh;
+	gfx::Texture texture;
+	Eroder eroder;
+};
+
+Terrain::Terrain()
+{
 	shader.compile("shaders/terrain.vert", GL_VERTEX_SHADER);
 	shader.compile("shaders/terrain.tesc", GL_TESS_CONTROL_SHADER);
 	shader.compile("shaders/terrain.tese", GL_TESS_EVALUATION_SHADER);
 	shader.compile("shaders/terrain.frag", GL_FRAGMENT_SHADER);
 	shader.link();
-
-	gfx::TesselationMesh mesh;
-	geom::Rectangle rectangle = { { BOUNDS.min.x, BOUNDS.min.z }, { BOUNDS.max.x, BOUNDS.max.z } };
-	mesh.create(32, rectangle);
-
-	gfx::Texture texture;
-
-	util::Image<float> heightmap;
+	
 	heightmap.resize(512, 512, util::COLORSPACE_GRAYSCALE);
 
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> distrib;
-
-	int seed = distrib(gen);
-
+	geom::Rectangle rectangle = { { BOUNDS.min.x, BOUNDS.min.z }, { BOUNDS.max.x, BOUNDS.max.z } };
+	mesh.create(32, rectangle);
+	
+	texture.create(heightmap);
+	
+	scale = BOUNDS.max - BOUNDS.min;
+}
+	
+void Terrain::reset(int seed)
+{
 	FastNoise fastnoise;
 	fastnoise.SetSeed(seed);
 	fastnoise.SetNoiseType(FastNoise::SimplexFractal);
@@ -75,10 +79,38 @@ void run(SDL_Window *window)
 
 	noise_image(heightmap, &fastnoise, glm::vec2(1.f), util::CHANNEL_RED);
 
-	texture.create(heightmap);
+	texture.reload(heightmap);
 
-	Eroder eroder;
 	eroder.reset(texture);
+}
+
+void Terrain::display(const util::Camera &camera) const
+{
+	shader.use();
+	shader.uniform_mat4("CAMERA_VP", camera.VP);
+	shader.uniform_vec3("MAP_SCALE", scale);
+
+	//texture.bind(GL_TEXTURE0);
+	mesh.draw();
+}
+
+void run(SDL_Window *window)
+{
+	const glm::vec3 scale = BOUNDS.max - BOUNDS.min;
+
+	util::Camera camera;
+	camera.set_projection(90.f, 1920, 1080, 0.1f, 2000.f);
+	camera.position = scale;
+	camera.target(glm::vec3(0.f, 0.f, 0.f));
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib;
+
+	int seed = distrib(gen);
+
+	Terrain terrain;
+	terrain.reset(seed);
 
 	util::FrameTimer timer;
 
@@ -94,8 +126,12 @@ void run(SDL_Window *window)
 		ImGui::NewFrame();
 		ImGui::Begin("Debug");
 		ImGui::SetWindowSize(ImVec2(400, 300));
+		ImGui::Text("Seed: %d", seed);
 		ImGui::Text("cam position: %f, %f, %f", camera.position.x, camera.position.y, camera.position.z);
-		ImGui::Text("cam direction: %f, %f, %f", camera.direction.x, camera.direction.y, camera.direction.z);
+		if (ImGui::Button("Reset")) {
+			seed = distrib(gen);
+			terrain.reset(seed);
+		}
 		ImGui::End();
 
 		if (util::InputManager::key_down(SDL_BUTTON_MIDDLE)) {
@@ -114,12 +150,7 @@ void run(SDL_Window *window)
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shader.use();
-		shader.uniform_mat4("CAMERA_VP", camera.VP);
-		shader.uniform_vec3("MAP_SCALE", scale);
-
-		//texture.bind(GL_TEXTURE0);
-		mesh.draw();
+		terrain.display(camera);
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
