@@ -153,6 +153,30 @@ src/camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
+src/erode.o: src/erode.cpp.o
+.PHONY : src/erode.o
+
+# target to build an object file
+src/erode.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/erode.cpp.o
+.PHONY : src/erode.cpp.o
+
+src/erode.i: src/erode.cpp.i
+.PHONY : src/erode.i
+
+# target to preprocess a source file
+src/erode.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/erode.cpp.i
+.PHONY : src/erode.cpp.i
+
+src/erode.s: src/erode.cpp.s
+.PHONY : src/erode.s
+
+# target to generate assembly for a file
+src/erode.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/eroder.dir/build.make CMakeFiles/eroder.dir/src/erode.cpp.s
+.PHONY : src/erode.cpp.s
+
 src/extern/fastnoise/FastNoise.o: src/extern/fastnoise/FastNoise.cpp.o
 .PHONY : src/extern/fastnoise/FastNoise.o
 
@@ -549,6 +573,9 @@ help:
 	@echo "... src/camera.o"
 	@echo "... src/camera.i"
 	@echo "... src/camera.s"
+	@echo "... src/erode.o"
+	@echo "... src/erode.i"
+	@echo "... src/erode.s"
 	@echo "... src/extern/fastnoise/FastNoise.o"
 	@echo "... src/extern/fastnoise/FastNoise.i"
 	@echo "... src/extern/fastnoise/FastNoise.s"

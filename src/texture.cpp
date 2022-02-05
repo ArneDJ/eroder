@@ -26,37 +26,50 @@ Texture::~Texture()
 		glDeleteTextures(1, &m_binding);
 	}
 }
+	
+GLsizei Texture::width() const
+{
+	return m_width;
+}
+	
+GLsizei Texture::height() const
+{
+	return m_height;
+}
 
 void Texture::create(const util::Image<uint8_t> &image)
 {
 	m_target = GL_TEXTURE_2D;
 
-	GLenum internal_format = 0;
-	GLenum type = GL_UNSIGNED_BYTE;
+	m_internal_format = 0;
+	m_type = GL_UNSIGNED_BYTE;
 
 	switch (image.channels()) {
 	case 1:
-		internal_format = GL_R8;
+		m_internal_format = GL_R8;
 		m_format = GL_RED;
 		break;
 	case 2:
-		internal_format = GL_RG8;
+		m_internal_format = GL_RG8;
 		m_format = GL_RG;
 		break;
 	case 3:
-		internal_format = GL_RGB8;
+		m_internal_format = GL_RGB8;
 		m_format = GL_RGB;
 		break;
 	case 4:
-		internal_format = GL_RGBA8;
+		m_internal_format = GL_RGBA8;
 		m_format = GL_RGBA;
 		break;
 	}
 
+	m_width = image.width();
+	m_height = image.height();
+
 	glBindTexture(m_target, m_binding);
 
-	glTexStorage2D(m_target, 1, internal_format, image.width(), image.height());
-	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, type, image.raster().data());
+	glTexStorage2D(m_target, 1, m_internal_format, image.width(), image.height());
+	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, m_type, image.raster().data());
 
 	glTexParameteri(m_target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(m_target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -71,32 +84,35 @@ void Texture::create(const util::Image<float> &image)
 {
 	m_target = GL_TEXTURE_2D;
 
-	GLenum internal_format = 0;
-	GLenum type = GL_FLOAT;
+	m_internal_format = 0;
+	m_type = GL_FLOAT;
 
 	switch (image.channels()) {
 	case 1:
-		internal_format = GL_R32F;
+		m_internal_format = GL_R32F;
 		m_format = GL_RED;
 		break;
 	case 2:
-		internal_format = GL_RG32F;
+		m_internal_format = GL_RG32F;
 		m_format = GL_RG;
 		break;
 	case 3:
-		internal_format = GL_RGB32F;
+		m_internal_format = GL_RGB32F;
 		m_format = GL_RGB;
 		break;
 	case 4:
-		internal_format = GL_RGBA32F;
+		m_internal_format = GL_RGBA32F;
 		m_format = GL_RGBA;
 		break;
 	}
 
+	m_width = image.width();
+	m_height = image.height();
+
 	glBindTexture(m_target, m_binding);
 
-	glTexStorage2D(m_target, 1, internal_format, image.width(), image.height());
-	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, type, image.raster().data());
+	glTexStorage2D(m_target, 1, m_internal_format, image.width(), image.height());
+	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, m_type, image.raster().data());
 
 	glTexParameteri(m_target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(m_target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -106,23 +122,64 @@ void Texture::create(const util::Image<float> &image)
 
 	glBindTexture(m_target, 0);
 }
+	
+void Texture::format(GLenum target, GLenum format, GLenum internal_format, GLenum type)
+{
+	m_target = target;
+	m_format = format;
+	m_internal_format = internal_format;
+	m_type = type;
+
+	glBindTexture(target, m_binding);
+
+	glTexImage2D(target, 0, internal_format, 1, 1, 0, format, type, NULL);
+
+	glTexParameteri(target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	glBindTexture(target, 0);
+}
+	
+void Texture::resize(GLsizei width, GLsizei height)
+{
+	m_width = width;
+	m_height = height;
+	
+	glBindTexture(m_target, m_binding);
+
+	glTexImage2D(m_target, 0, m_internal_format, width, height, 0, m_format, m_type, NULL);
+}
 
 void Texture::reload(const util::Image<uint8_t> &image)
 {
+	m_width = image.width();
+	m_height = image.height();
+
 	glBindTexture(m_target, m_binding);
-	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, GL_UNSIGNED_BYTE, image.raster().data());
+	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, m_type, image.raster().data());
 }
 
 void Texture::reload(const util::Image<float> &image)
 {
+	m_width = image.width();
+	m_height = image.height();
+
 	glBindTexture(m_target, m_binding);
-	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, GL_FLOAT, image.raster().data());
+	glTexSubImage2D(m_target, 0, 0, 0, image.width(), image.height(), m_format, m_type, image.raster().data());
 }
 
 void Texture::bind(GLenum unit) const
 {
 	glActiveTexture(unit);
 	glBindTexture(m_target, m_binding);
+}
+	
+void Texture::bind(GLenum unit, GLenum access) const
+{
+	glBindImageTexture(unit, m_binding, 0, GL_FALSE, 0, access, m_internal_format);
 }
 	
 GLuint Texture::binding()

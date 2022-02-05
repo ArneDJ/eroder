@@ -25,6 +25,7 @@
 #include "texture.h"
 #include "shader.h"
 #include "noise.h"
+#include "erode.h"
 
 const geom::AABB BOUNDS = {
 	{ 0.f, 0.f, 0.f },
@@ -76,6 +77,9 @@ void run(SDL_Window *window)
 
 	texture.create(heightmap);
 
+	Eroder eroder;
+	eroder.reset(texture);
+
 	util::FrameTimer timer;
 
 	while (!util::InputManager::exit_request()) {
@@ -114,7 +118,7 @@ void run(SDL_Window *window)
 		shader.uniform_mat4("CAMERA_VP", camera.VP);
 		shader.uniform_vec3("MAP_SCALE", scale);
 
-		texture.bind(GL_TEXTURE0);
+		//texture.bind(GL_TEXTURE0);
 		mesh.draw();
 
 		ImGui::Render();

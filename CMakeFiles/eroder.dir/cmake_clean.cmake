@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/eroder.dir/src/camera.cpp.o"
   "CMakeFiles/eroder.dir/src/camera.cpp.o.d"
+  "CMakeFiles/eroder.dir/src/erode.cpp.o"
+  "CMakeFiles/eroder.dir/src/erode.cpp.o.d"
   "CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o"
   "CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o.d"
   "CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o"

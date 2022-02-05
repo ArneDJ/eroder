@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/foo/Projects/repos/mine/eroder/src/camera.cpp" "CMakeFiles/eroder.dir/src/camera.cpp.o" "gcc" "CMakeFiles/eroder.dir/src/camera.cpp.o.d"
+  "/home/foo/Projects/repos/mine/eroder/src/erode.cpp" "CMakeFiles/eroder.dir/src/erode.cpp.o" "gcc" "CMakeFiles/eroder.dir/src/erode.cpp.o.d"
   "/home/foo/Projects/repos/mine/eroder/src/extern/fastnoise/FastNoise.cpp" "CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o" "gcc" "CMakeFiles/eroder.dir/src/extern/fastnoise/FastNoise.cpp.o.d"
   "/home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui.cpp" "CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o" "gcc" "CMakeFiles/eroder.dir/src/extern/imgui/imgui.cpp.o.d"
   "/home/foo/Projects/repos/mine/eroder/src/extern/imgui/imgui_demo.cpp" "CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o" "gcc" "CMakeFiles/eroder.dir/src/extern/imgui/imgui_demo.cpp.o.d"
