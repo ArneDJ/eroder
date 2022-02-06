@@ -22,8 +22,14 @@ void main(void)
 
 	tesseval.texcoord = position.xz / MAP_SCALE.xz;
 
-	position.y = MAP_SCALE.y * (texture(DISPLACEMENT, tesseval.texcoord).r + texture(WATER, tesseval.texcoord).r);
-	//position.y = (texture(DISPLACEMENT, tesseval.texcoord).r + texture(WATER, tesseval.texcoord).r);
+	float water_height = texture(WATER, tesseval.texcoord).r;
+	float terrain_height = texture(DISPLACEMENT, tesseval.texcoord).r;
+	// to avoid z-fighting with the terrain clamp the water height 
+	float height = water_height + terrain_height;
+	if (water_height < 0.001) {
+		height = 0.9 * terrain_height;
+	}
+	position.y = MAP_SCALE.y * height;
 
 	tesseval.position = position.xyz;
 

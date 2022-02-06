@@ -26,7 +26,6 @@ void main(void)
 
 	float l = 1.0;
 	float A = l * l; // pipe area
-	float g = 0.8f; // gravity
 
 	vec4 flux = imageLoad(FLUX_PING, uv);
 

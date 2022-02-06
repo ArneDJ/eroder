@@ -94,10 +94,6 @@ void Eroder::reset(const gfx::Texture &input)
 
 	glDispatchCompute(INT_CEIL(m_width, 32), INT_CEIL(m_height, 32), 1);
 	glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
-
-	for (int i = 0; i < 10; i++) {
-		increment_water(1.f);
-	}
 }
 	
 void Eroder::step(float time)

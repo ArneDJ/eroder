@@ -30,10 +30,10 @@ float terrain_slope(ivec2 uv)
 
 void main(void)
 {
-	const float Ks = 0.025; // dissolving constant
-	const float Kd = 0.004; // deposition constant
+	const float Ks = 0.015; // dissolving constant
+	const float Kd = 0.025; // deposition constant
 	// sediment transport capacity constant Kc
-	const float Kc = 1.6F;
+	const float Kc = 1.2F;
 
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
@@ -71,13 +71,8 @@ void main(void)
 	}
 
 	// clamp height
-	/*
-	if (d1 > 1.f) {
-		d1 = 1.f;
-	} else if (d1 < 0.f) {
-		d1 = 0.f;
-	}
-	*/
+	b1 = clamp(b1, 0.f, 1.f);
+
 	imageStore(TERRAIN_PONG, uv, vec4(b1));
 	imageStore(SEDIMENT_PONG, uv, vec4(s1));
 }

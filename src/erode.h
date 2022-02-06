@@ -5,6 +5,13 @@ public:
 	void reset(const gfx::Texture &input);
 	void step(float time);
 	void bind_textures() const;
+public:
+	void increment_water(float time);
+	void simulate_flow(float time);
+	void update_water_velocity(float time);
+	void erosion_deposition();
+	void transport_sediment(float time);
+	void evaporate_water(float time);
 private:
 	int m_width = 0;
 	int m_height = 0;
@@ -26,11 +33,4 @@ private:
 	gfx::Texture m_velocity_field;
 	gfx::Texture m_sediment_ping;
 	gfx::Texture m_sediment_pong;
-private:
-	void increment_water(float time);
-	void simulate_flow(float time);
-	void update_water_velocity(float time);
-	void erosion_deposition();
-	void transport_sediment(float time);
-	void evaporate_water(float time);
 };

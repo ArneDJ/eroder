@@ -26,6 +26,7 @@ void main(void)
 	//fcolor = texture(FLUX, fragment.texcoord);
 
 	fcolor = vec4(vec3(height), 1.0);
+	//fcolor.rgb = mix(fcolor.rgb, vec3(0.5, 0.5, 0.), sediment);
 	//fcolor = vec4(vec3(sediment), 1.0);
 
 	//fcolor.rgb = mix(fcolor.rgb, vec3(0.0, 0.0, 1.0), water);

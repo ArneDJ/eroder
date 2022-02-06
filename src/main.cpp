@@ -72,6 +72,7 @@ public:
 public:
 	void reset(int seed);
 	void update(float delta);
+	void add_water(float delta);
 	void display(const util::Camera &camera) const;
 public:
 	glm::vec3 scale = {};
@@ -106,7 +107,7 @@ void Terrain::reset(int seed)
 	fastnoise.SetSeed(seed);
 	fastnoise.SetNoiseType(FastNoise::SimplexFractal);
 	fastnoise.SetFractalType(FastNoise::FBM);
-	fastnoise.SetFrequency(0.0015f);
+	fastnoise.SetFrequency(0.002f);
 	fastnoise.SetFractalOctaves(6);
 	fastnoise.SetFractalLacunarity(2.f);
 	fastnoise.SetPerturbFrequency(0.001f);
@@ -122,6 +123,11 @@ void Terrain::reset(int seed)
 void Terrain::update(float delta)
 {
 	eroder.step(delta);
+}
+
+void Terrain::add_water(float delta)
+{
+	eroder.increment_water(delta);
 }
 
 void Terrain::display(const util::Camera &camera) const
@@ -174,6 +180,9 @@ void run(SDL_Window *window)
 		if (ImGui::Button("Reset")) {
 			seed = distrib(gen);
 			terrain.reset(seed);
+		}
+		if (ImGui::Button("Add Water")) {
+			terrain.add_water(100.f);
 		}
 		ImGui::End();
 
