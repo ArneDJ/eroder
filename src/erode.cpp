@@ -62,6 +62,7 @@ Eroder::Eroder()
 	m_velocity_field.format(GL_TEXTURE_2D, GL_RG, GL_RG32F, GL_FLOAT);
 	m_sediment_ping.format(GL_TEXTURE_2D, GL_RED, GL_R32F, GL_FLOAT);
 	m_sediment_pong.format(GL_TEXTURE_2D, GL_RED, GL_R32F, GL_FLOAT);
+	m_normal_map.format(GL_TEXTURE_2D, GL_RGBA, GL_RGBA32F, GL_FLOAT);
 }
 	
 void Eroder::bind_textures() const
@@ -70,6 +71,7 @@ void Eroder::bind_textures() const
 	m_water_ping.bind(GL_TEXTURE11);
 	m_flux_ping.bind(GL_TEXTURE12);
 	m_sediment_ping.bind(GL_TEXTURE13);
+	m_normal_map.bind(GL_TEXTURE14);
 }
 	
 void Eroder::reset(const gfx::Texture &input)
@@ -86,6 +88,7 @@ void Eroder::reset(const gfx::Texture &input)
 	m_velocity_field.resize(input.width(), input.height());
 	m_sediment_ping.resize(input.width(), input.height());
 	m_sediment_pong.resize(input.width(), input.height());
+	m_normal_map.resize(input.width(), input.height());
 
 	// copy input data
 	m_copy.use();
@@ -169,6 +172,7 @@ void Eroder::erosion_deposition()
 
 	m_terrain_pong.bind(3, GL_WRITE_ONLY);
 	m_sediment_pong.bind(4, GL_WRITE_ONLY);
+	m_normal_map.bind(5, GL_WRITE_ONLY);
 
 	glDispatchCompute(INT_CEIL(m_width, 32), INT_CEIL(m_height, 32), 1);
 	glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);

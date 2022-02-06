@@ -38,4 +38,5 @@ private:
 	gfx::Texture m_velocity_field;
 	gfx::Texture m_sediment_ping;
 	gfx::Texture m_sediment_pong;
+	gfx::Texture m_normal_map;
 };

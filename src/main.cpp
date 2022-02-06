@@ -66,6 +66,16 @@ Water::Water()
 	scale = BOUNDS.max - BOUNDS.min;
 }
 
+struct NoiseParameters {
+	FastNoise::NoiseType noise_type = FastNoise::SimplexFractal;
+	FastNoise::FractalType fractal_type = FastNoise::FBM;
+	float frequency = 0.002f;
+	int octaves = 6;
+	float lacunarity = 2.f;
+	float perturb_frequency = 0.001f;
+	float perturb_amp = 20.f;
+};
+
 class Terrain {
 public:
 	Terrain();
@@ -106,7 +116,7 @@ void Terrain::reset(int seed)
 	FastNoise fastnoise;
 	fastnoise.SetSeed(seed);
 	fastnoise.SetNoiseType(FastNoise::SimplexFractal);
-	fastnoise.SetFractalType(FastNoise::RigidMulti);
+	fastnoise.SetFractalType(FastNoise::Billow);
 	//enum FractalType { FBM, Billow, RigidMulti };
 	fastnoise.SetFrequency(0.002f);
 	fastnoise.SetFractalOctaves(6);
@@ -166,6 +176,8 @@ void run(SDL_Window *window)
 
 	auto &eroder = terrain.eroder;
 
+	bool display_water = true;
+
 	while (!util::InputManager::exit_request()) {
 		timer.begin();
 		float delta = timer.delta_seconds();
@@ -180,6 +192,7 @@ void run(SDL_Window *window)
 		ImGui::SetWindowSize(ImVec2(400, 300));
 		ImGui::Text("Seed: %d", seed);
 		ImGui::Text("cam position: %f, %f, %f", camera.position.x, camera.position.y, camera.position.z);
+		ImGui::Checkbox("Display water", &display_water);
 		if (ImGui::Button("Reset")) {
 			seed = distrib(gen);
 			terrain.reset(seed);
@@ -214,7 +227,9 @@ void run(SDL_Window *window)
 
 		terrain.display(camera);
 
-		water.display(camera);
+		if (display_water) {
+			water.display(camera);
+		}
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
