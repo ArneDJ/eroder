@@ -9,6 +9,7 @@ out TESSEVAL {
 } tesseval;
 
 layout (binding = 10) uniform sampler2D DISPLACEMENT;
+layout (binding = 11) uniform sampler2D WATER;
 
 uniform mat4 CAMERA_VP;
 uniform vec3 MAP_SCALE;
@@ -21,8 +22,8 @@ void main(void)
 
 	tesseval.texcoord = position.xz / MAP_SCALE.xz;
 
-	position.y = MAP_SCALE.y * texture(DISPLACEMENT, tesseval.texcoord).r;
-	//position.y = texture(DISPLACEMENT, tesseval.texcoord).r;
+	position.y = MAP_SCALE.y * (texture(DISPLACEMENT, tesseval.texcoord).r + texture(WATER, tesseval.texcoord).r);
+	//position.y = (texture(DISPLACEMENT, tesseval.texcoord).r + texture(WATER, tesseval.texcoord).r);
 
 	tesseval.position = position.xyz;
 

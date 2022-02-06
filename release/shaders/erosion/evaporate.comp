@@ -11,14 +11,11 @@ void main(void)
 {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
-	vec4 color = imageLoad(WATER_PING, uv);
+	const float Ke = 0.02; // evaporation constant Ke
 
-	const float Kr = 0.01f; // fixed amount of rain
-	// update water height
-	float water = color.r;
-	float d = water + TIME * Kr;
+	float d2 = imageLoad(WATER_PING, uv).r;
 
-	color = vec4(d);
+	float dt = d2 * (1.f - Ke * TIME);
 
-	imageStore(WATER_PONG, uv, color);
+	imageStore(WATER_PONG, uv, vec4(dt));
 }

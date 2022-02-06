@@ -1,0 +1,83 @@
+#version 430 core
+
+layout (r32f, binding = 0) readonly uniform image2D TERRAIN_PING;
+layout (r32f, binding = 1) readonly uniform image2D SEDIMENT_PING;
+layout (rg32f, binding = 2) readonly uniform image2D VELOCITY_FIELD;
+
+layout (r32f, binding = 3) writeonly uniform image2D TERRAIN_PONG;
+layout (r32f, binding = 4) writeonly uniform image2D SEDIMENT_PONG;
+
+layout (local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
+
+/*
+ * r: right
+ * g: left
+ * b: bottom
+ * a: top
+*/
+
+float terrain_slope(ivec2 uv)
+{
+	float T = imageLoad(TERRAIN_PING, ivec2(uv.x, uv.y + 1)).r;
+	float B = imageLoad(TERRAIN_PING, ivec2(uv.x, uv.y - 1)).r;
+	float R = imageLoad(TERRAIN_PING, ivec2(uv.x + 1, uv.y)).r;
+	float L = imageLoad(TERRAIN_PING, ivec2(uv.x - 1, uv.y)).r;
+
+	vec3 normal = normalize(vec3(L - R, 2.f, T - B));
+
+	return normal.y;
+}
+
+void main(void)
+{
+	const float Ks = 0.025; // dissolving constant
+	const float Kd = 0.004; // deposition constant
+	// sediment transport capacity constant Kc
+	const float Kc = 1.6F;
+
+	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
+
+	float tilt_angle = terrain_slope(uv);
+	tilt_angle = abs(sqrt(1.f - tilt_angle * tilt_angle));
+
+	// for very flat terrains the angle will be close to 0
+	// so limit it
+	tilt_angle = max(0.1f, tilt_angle) ;
+
+	vec2 v = imageLoad(VELOCITY_FIELD, uv).rg;
+
+	// sediment transport capacity C
+	float C = Kc * sin(tilt_angle) * length(v);
+
+	float st = imageLoad(SEDIMENT_PING, uv).r;
+
+	// current terrain height
+	float b = imageLoad(TERRAIN_PING, uv).r;
+
+	float s1 = 0.f;
+	float b1 = 0.f;
+
+	// compare C with the suspended sediment amount s to decide the erosion-deposition process
+	// if C > st some soil is dissolved into the water and added to the suspended sediment
+	if (C > st) {
+		float soil = Ks * (C - st);
+		b1 = b - soil; // remove soil from terrain
+		s1 = st + soil; // add soil to sediment
+	} else if (C <= st) {
+		// deposit sediment
+		float soil = Kd * (st - C);
+		b1 = b + soil;
+		s1 = st - soil;
+	}
+
+	// clamp height
+	/*
+	if (d1 > 1.f) {
+		d1 = 1.f;
+	} else if (d1 < 0.f) {
+		d1 = 0.f;
+	}
+	*/
+	imageStore(TERRAIN_PONG, uv, vec4(b1));
+	imageStore(SEDIMENT_PONG, uv, vec4(s1));
+}

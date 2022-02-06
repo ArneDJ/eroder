@@ -29,8 +29,42 @@
 
 const geom::AABB BOUNDS = {
 	{ 0.f, 0.f, 0.f },
-	{ 1024.f, 512.f, 1024.f }
+	{ 1024.f, 256.f, 1024.f }
 };
+
+class Water {
+public:
+	Water();
+public:
+	void display(const util::Camera &camera) const;
+public:
+	glm::vec3 scale = {};
+	gfx::Shader shader;
+	gfx::TesselationMesh mesh;
+};
+
+void Water::display(const util::Camera &camera) const
+{
+	shader.use();
+	shader.uniform_mat4("CAMERA_VP", camera.VP);
+	shader.uniform_vec3("MAP_SCALE", scale);
+
+	mesh.draw();
+}
+
+Water::Water()
+{
+	shader.compile("shaders/water.vert", GL_VERTEX_SHADER);
+	shader.compile("shaders/water.tesc", GL_TESS_CONTROL_SHADER);
+	shader.compile("shaders/water.tese", GL_TESS_EVALUATION_SHADER);
+	shader.compile("shaders/water.frag", GL_FRAGMENT_SHADER);
+	shader.link();
+	
+	geom::Rectangle rectangle = { { BOUNDS.min.x, BOUNDS.min.z }, { BOUNDS.max.x, BOUNDS.max.z } };
+	mesh.create(32, rectangle);
+	
+	scale = BOUNDS.max - BOUNDS.min;
+}
 
 class Terrain {
 public:
@@ -78,7 +112,7 @@ void Terrain::reset(int seed)
 	fastnoise.SetPerturbFrequency(0.001f);
 	fastnoise.SetGradientPerturbAmp(20.f);
 
-	noise_image(heightmap, &fastnoise, glm::vec2(1.f), util::CHANNEL_RED);
+	noise_image(heightmap, &fastnoise, glm::vec2(1.f), 1.f, util::CHANNEL_RED);
 
 	texture.reload(heightmap);
 
@@ -119,6 +153,8 @@ void run(SDL_Window *window)
 	Terrain terrain;
 	terrain.reset(seed);
 
+	Water water;
+
 	util::FrameTimer timer;
 
 	while (!util::InputManager::exit_request()) {
@@ -157,9 +193,11 @@ void run(SDL_Window *window)
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		terrain.update(delta);
+		terrain.update(10.f * delta);
 
 		terrain.display(camera);
+
+		water.display(camera);
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

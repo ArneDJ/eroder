@@ -1,0 +1,35 @@
+#version 430 core
+
+layout (r32f, binding = 0) readonly uniform image2D SEDIMENT_PING;
+layout (rg32f, binding = 1) readonly uniform image2D VELOCITY_FIELD;
+
+layout (r32f, binding = 2) writeonly uniform image2D SEDIMENT_PONG;
+
+layout (local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
+
+uniform float TIME;
+
+/*
+ * r: right
+ * g: left
+ * b: bottom
+ * a: top
+*/
+
+
+void main(void)
+{
+	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
+
+	// the updated sediment is transported by the flow velocity vector
+	vec2 v = imageLoad(VELOCITY_FIELD, uv).rg;
+
+	// semi-Lagrangian advection method
+	// TODO recheck this
+	float back_x = uv.x - v.x * TIME;
+	float back_y = uv.y - v.y * TIME;
+
+	float st = imageLoad(SEDIMENT_PING, ivec2(back_x, back_y)).r;
+
+	imageStore(SEDIMENT_PONG, uv, vec4(st));
+}

@@ -10,7 +10,7 @@
 
 namespace util {
 
-void noise_image(Image<float> &image, FastNoise *fastnoise, const glm::vec2 &sample_freq, uint8_t channel)
+void noise_image(Image<float> &image, FastNoise *fastnoise, const glm::vec2 &sample_freq, float amplitude, uint8_t channel)
 {
 	const int nsteps = 32;
 	const int stepsize = image.width() / nsteps;
@@ -25,7 +25,7 @@ void noise_image(Image<float> &image, FastNoise *fastnoise, const glm::vec2 &sam
 				float y = sample_freq.y * i;
 				fastnoise->GradientPerturbFractal(x, y);
 				float value = 0.5f * (fastnoise->GetNoise(x, y) + 1.f);
-				image.plot(j, i, channel, glm::clamp(value, 0.f, 1.f));
+				image.plot(j, i, channel, amplitude * glm::clamp(value, 0.f, 1.f));
 			}
 		}
 	}
