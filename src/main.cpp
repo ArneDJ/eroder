@@ -106,7 +106,8 @@ void Terrain::reset(int seed)
 	FastNoise fastnoise;
 	fastnoise.SetSeed(seed);
 	fastnoise.SetNoiseType(FastNoise::SimplexFractal);
-	fastnoise.SetFractalType(FastNoise::FBM);
+	fastnoise.SetFractalType(FastNoise::RigidMulti);
+	//enum FractalType { FBM, Billow, RigidMulti };
 	fastnoise.SetFrequency(0.002f);
 	fastnoise.SetFractalOctaves(6);
 	fastnoise.SetFractalLacunarity(2.f);
@@ -163,6 +164,8 @@ void run(SDL_Window *window)
 
 	util::FrameTimer timer;
 
+	auto &eroder = terrain.eroder;
+
 	while (!util::InputManager::exit_request()) {
 		timer.begin();
 		float delta = timer.delta_seconds();
@@ -184,6 +187,11 @@ void run(SDL_Window *window)
 		if (ImGui::Button("Add Water")) {
 			terrain.add_water(100.f);
 		}
+		ImGui::SliderFloat("Ks", &eroder.dissolve_factor, 0.f, 2.f);
+		ImGui::SliderFloat("Kd", &eroder.deposition_factor, 0.f, 2.f);
+		ImGui::SliderFloat("Kc", &eroder.transport_capacity, 0.f, 2.f);
+		ImGui::SliderFloat("Ke", &eroder.evaporation_factor, 0.f, 2.f);
+
 		ImGui::End();
 
 		if (util::InputManager::key_down(SDL_BUTTON_MIDDLE)) {

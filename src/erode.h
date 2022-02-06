@@ -1,6 +1,11 @@
 
 class Eroder {
 public:
+	float dissolve_factor = 0.015f;
+	float deposition_factor = 0.025f;
+	float transport_capacity = 1.2f;
+	float evaporation_factor = 0.02f;
+public:
 	Eroder();
 	void reset(const gfx::Texture &input);
 	void step(float time);

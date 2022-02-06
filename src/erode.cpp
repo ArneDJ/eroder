@@ -159,10 +159,14 @@ void Eroder::update_water_velocity(float time)
 void Eroder::erosion_deposition()
 {
 	m_soil.use();
+	m_soil.uniform_float("Ks", dissolve_factor);
+	m_soil.uniform_float("Kd", deposition_factor);
+	m_soil.uniform_float("Kc", transport_capacity);
 
 	m_terrain_ping.bind(0, GL_READ_ONLY);
 	m_sediment_ping.bind(1, GL_READ_ONLY);
 	m_velocity_field.bind(2, GL_READ_ONLY);
+
 	m_terrain_pong.bind(3, GL_WRITE_ONLY);
 	m_sediment_pong.bind(4, GL_WRITE_ONLY);
 
@@ -192,6 +196,7 @@ void Eroder::evaporate_water(float time)
 {
 	m_evaporate.use();
 	m_evaporate.uniform_float("TIME", time);
+	m_evaporate.uniform_float("Ke", evaporation_factor);
 
 	m_water_ping.bind(0, GL_READ_ONLY);
 	m_water_pong.bind(1, GL_WRITE_ONLY);
