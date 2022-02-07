@@ -165,6 +165,7 @@ void Eroder::erosion_deposition()
 	m_soil.uniform_float("Ks", dissolve_factor);
 	m_soil.uniform_float("Kd", deposition_factor);
 	m_soil.uniform_float("Kc", transport_capacity);
+	m_soil.uniform_float("AMPLITUDE", amplitude);
 
 	m_terrain_ping.bind(0, GL_READ_ONLY);
 	m_sediment_ping.bind(1, GL_READ_ONLY);

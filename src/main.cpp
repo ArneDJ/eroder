@@ -82,9 +82,9 @@ public:
 public:
 	void reset(int seed);
 	void update(float delta);
-	void add_water(float delta);
 	void display(const util::Camera &camera) const;
 public:
+	NoiseParameters noise = {};
 	glm::vec3 scale = {};
 	gfx::Shader shader;
 	util::Image<float> heightmap;
@@ -115,14 +115,14 @@ void Terrain::reset(int seed)
 {
 	FastNoise fastnoise;
 	fastnoise.SetSeed(seed);
-	fastnoise.SetNoiseType(FastNoise::SimplexFractal);
-	fastnoise.SetFractalType(FastNoise::Billow);
+	fastnoise.SetNoiseType(noise.noise_type);
+	fastnoise.SetFractalType(noise.fractal_type);
 	//enum FractalType { FBM, Billow, RigidMulti };
-	fastnoise.SetFrequency(0.002f);
-	fastnoise.SetFractalOctaves(6);
-	fastnoise.SetFractalLacunarity(2.f);
-	fastnoise.SetPerturbFrequency(0.001f);
-	fastnoise.SetGradientPerturbAmp(20.f);
+	fastnoise.SetFrequency(noise.frequency);
+	fastnoise.SetFractalOctaves(noise.octaves);
+	fastnoise.SetFractalLacunarity(noise.lacunarity);
+	fastnoise.SetPerturbFrequency(noise.perturb_frequency);
+	fastnoise.SetGradientPerturbAmp(noise.perturb_amp);
 
 	noise_image(heightmap, &fastnoise, glm::vec2(1.f), 1.f, util::CHANNEL_RED);
 
@@ -134,11 +134,6 @@ void Terrain::reset(int seed)
 void Terrain::update(float delta)
 {
 	eroder.step(delta);
-}
-
-void Terrain::add_water(float delta)
-{
-	eroder.increment_water(delta);
 }
 
 void Terrain::display(const util::Camera &camera) const
@@ -177,6 +172,7 @@ void run(SDL_Window *window)
 	auto &eroder = terrain.eroder;
 
 	bool display_water = true;
+	float sim_speed = 1.f;
 
 	while (!util::InputManager::exit_request()) {
 		timer.begin();
@@ -188,24 +184,43 @@ void run(SDL_Window *window)
 		ImGui_ImplSDL2_NewFrame(window);
 
 		ImGui::NewFrame();
+
 		ImGui::Begin("Debug");
 		ImGui::SetWindowSize(ImVec2(400, 300));
 		ImGui::Text("Seed: %d", seed);
 		ImGui::Text("cam position: %f, %f, %f", camera.position.x, camera.position.y, camera.position.z);
 		ImGui::Checkbox("Display water", &display_water);
-		if (ImGui::Button("Reset")) {
-			seed = distrib(gen);
-			terrain.reset(seed);
-		}
 		if (ImGui::Button("Add Water")) {
-			terrain.add_water(100.f);
+			eroder.increment_water(1.f);
 		}
+		ImGui::SliderFloat("Speed", &sim_speed, 0.f, 10.f);
 		ImGui::SliderFloat("Ks", &eroder.dissolve_factor, 0.f, 2.f);
 		ImGui::SliderFloat("Kd", &eroder.deposition_factor, 0.f, 2.f);
 		ImGui::SliderFloat("Kc", &eroder.transport_capacity, 0.f, 2.f);
 		ImGui::SliderFloat("Ke", &eroder.evaporation_factor, 0.f, 2.f);
-
 		ImGui::End();
+
+		
+		const char *items[] = { "FBM", "Billow", "RidgedMulti" };
+		static int item_current = 0;
+		ImGui::Begin("Terrain parameters");
+		ImGui::SetWindowSize(ImVec2(400, 300));
+		if (ImGui::Button("Reset")) {
+			seed = distrib(gen);
+			terrain.reset(seed);
+		}
+		ImGui::SliderFloat("Amplitude", &terrain.scale.y, 1.f, 256.f);
+		ImGui::Combo("Fractal type", &item_current, &items[0], 3);
+		ImGui::SliderFloat("Frequency", &terrain.noise.frequency, 0.f, 0.02f);
+		ImGui::SliderInt("Octaves", &terrain.noise.octaves, 0, 10);
+		ImGui::SliderFloat("Lacunarity", &terrain.noise.lacunarity, 1.f, 6.f);
+		ImGui::SliderFloat("Perturb frequency", &terrain.noise.perturb_frequency, 0.f, 0.009f);
+		ImGui::SliderFloat("Perturb amp", &terrain.noise.perturb_amp, 0.f, 200.f);
+		ImGui::End();
+		
+		terrain.noise.fractal_type = FastNoise::FractalType(item_current);
+		water.scale.y = terrain.scale.y;
+		eroder.amplitude = terrain.scale.y / 8.f;
 
 		if (util::InputManager::key_down(SDL_BUTTON_MIDDLE)) {
 			glm::vec2 offset = delta * 0.1f * util::InputManager::rel_mouse_coords();
@@ -223,12 +238,14 @@ void run(SDL_Window *window)
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		terrain.update(10.f * delta);
+		terrain.update(sim_speed * delta);
 
 		terrain.display(camera);
 
 		if (display_water) {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			water.display(camera);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 
 		ImGui::Render();

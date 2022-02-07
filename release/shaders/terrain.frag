@@ -16,6 +16,7 @@ layout (binding = 14) uniform sampler2D NORMAL_MAP;
 //uniform sampler2D TILES;
 //uniform sampler2D NORMALMAP;
 
+uniform vec3 MAP_SCALE;
 uniform vec3 SUN_POS = vec3(0.2, 0.5, 0.1);
 
 void main(void)
@@ -25,6 +26,9 @@ void main(void)
 	float sediment = texture(SEDIMENT, fragment.texcoord).r;
 
 	vec3 normal = texture(NORMAL_MAP, fragment.texcoord).rgb;
+
+	//normal.y *= MAP_SCALE.y;
+	//normal = normalize(normal);
 	
 	fcolor = vec4(0.8, 0.8, 0.8, 1.0);
 
