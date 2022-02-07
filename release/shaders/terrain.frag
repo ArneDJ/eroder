@@ -36,8 +36,8 @@ void main(void)
 
 	//fcolor = vec4(vec3(height), 1.0);
 	//fcolor = vec4(normal, 1.0);
-	//fcolor.rgb = mix(fcolor.rgb, vec3(0.5, 0.5, 0.), sediment);
-	//fcolor = vec4(vec3(sediment), 1.0);
+	//fcolor.rgb = mix(fcolor.rgb, vec3(0.5, 0.5, 0.0), sediment);
+	fcolor = vec4(vec3(smoothstep(0.0, 0.001, sediment)), 1.0);
 
 	//fcolor.rgb = mix(fcolor.rgb, vec3(0.0, 0.0, 1.0), water);
 	//fcolor = vec4(0.5, 0.5, 0.5, 1.0);

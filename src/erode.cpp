@@ -189,7 +189,7 @@ void Eroder::transport_sediment(float time)
 
 	m_sediment_ping.bind(0, GL_READ_ONLY);
 	m_velocity_field.bind(1, GL_READ_ONLY);
-	m_sediment_pong.bind(3, GL_WRITE_ONLY);
+	m_sediment_pong.bind(2, GL_WRITE_ONLY);
 
 	glDispatchCompute(INT_CEIL(m_width, 32), INT_CEIL(m_height, 32), 1);
 	glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
